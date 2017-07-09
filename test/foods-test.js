@@ -40,10 +40,11 @@ test.describe('testing food index', function() {
     })
   })
 
-  test.it("lets a user create a new entry", function(){
+  test.it("lets a user create a new food", function(){
     // given:
     // go there
     driver.get(`${frontEndLocation}/foods.html`)
+    driver.wait(until.elementLocated({css: "#foods .food"}))
 
     // when:
     // fill in auther field
@@ -55,16 +56,16 @@ test.describe('testing food index', function() {
       // assert.include()
     })
 
-    driver.findElement({css: "#food-name-field input"})
+    driver.findElement({css: "input#food-name-field.form-field"})
     .sendKeys("Pizza")
-    driver.findElement({css: "#calories-field input"})
+    driver.findElement({css: "input#calories-field.form-field"})
     .sendKeys(300)
     driver.findElement({css: "input[type=submit]"})
     .click()
 
     // then:
     // see the post in the list of entries
-    driver.wait(until.elementLocated({css: ".food[data-id='4']"}))
+    driver.wait(until.elementLocated({css: "#foods .food[data-id='4']"}))
 
     driver.findElements({css: "#foods .food"})
     .then(function(foods) {
