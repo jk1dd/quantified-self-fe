@@ -65,7 +65,8 @@ test.describe('testing food index', function() {
 
     // then:
     // see the post in the list of entries
-    driver.wait(until.elementLocated({css: "#foods .food[data-id='4']"}))
+    // driver.wait(until.elementLocated({css: "#foods .food[data-id='4']"}))
+    driver.sleep(5000)
 
     driver.findElements({css: "#foods .food"})
     .then(function(foods) {
@@ -83,4 +84,18 @@ test.describe('testing food index', function() {
     // })
 
   })
+  //
+  // test.it("shows an error for missing name", function(){
+  //   driver.get(`${frontEndLocation}/foods.html`)
+  //   driver.wait(until.elementLocated({css: "#foods .food"}))
+  //
+  //   driver.findElement({css: "input#food-name-field.form-field"})
+  //   .sendKeys("")
+  //   driver.findElement({css: "input#calories-field.form-field"})
+  //   .sendKeys(300)
+  //   driver.findElement({css: "input[type=submit]"})
+  //   .click()
+  //
+  //
+  // })
 });
