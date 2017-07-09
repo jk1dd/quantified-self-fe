@@ -32,19 +32,44 @@ test.describe('testing food index', function() {
     driver.wait(until.elementLocated({css: "#meal-4 .remaining-calories"}))
     driver.findElement({css: "#meal-1 .food-meal[data-id='1'] .name"}).getText()
     .then(function(foodName) {
-      assert.equal("Orange", foodName)
+      assert.equal(foodName, "Orange")
     })
     driver.findElement({css: "#meal-1 .food-meal[data-id='1'] .calories"}).getText()
     .then(function(foodCalories) {
-      assert.equal("90", foodCalories)
+      assert.equal(foodCalories, "90")
     })
     driver.findElement({css: "#meal-4 .food-meal[data-id='10'] .name"}).getText()
     .then(function(foodName) {
-      assert.equal("Orange", foodName)
+      assert.equal(foodName, "Orange")
     })
     driver.findElement({css: "#meal-4 .food-meal[data-id='10'] .calories"}).getText()
     .then(function(foodCalories) {
-      assert.equal("90", foodCalories)
+      assert.equal(foodCalories, "90")
+    })
+  })
+
+  test.it("each meal table has a total calories calculation at the bottom", function() {
+    driver.get(`${frontEndLocation}`)
+    driver.wait(until.elementLocated({css: "#meal-4 .remaining-calories"}))
+    driver.findElement({css: "#meal-1 .total-calories"}).getText()
+    .then(function(totalCalorieRow) {
+      assert.include(totalCalorieRow, "Total Calories")
+      assert.include(totalCalorieRow, "495")
+    })
+    driver.findElement({css: "#meal-2 .total-calories"}).getText()
+    .then(function(totalCalorieRow) {
+      assert.include(totalCalorieRow, "Total Calories")
+      assert.include(totalCalorieRow, "495")
+    })
+    driver.findElement({css: "#meal-3 .total-calories"}).getText()
+    .then(function(totalCalorieRow) {
+      assert.include(totalCalorieRow, "Total Calories")
+      assert.include(totalCalorieRow, "495")
+    })
+    driver.findElement({css: "#meal-4 .total-calories"}).getText()
+    .then(function(totalCalorieRow) {
+      assert.include(totalCalorieRow, "Total Calories")
+      assert.include(totalCalorieRow, "495")
     })
   })
 
