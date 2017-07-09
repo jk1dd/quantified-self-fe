@@ -84,18 +84,59 @@ test.describe('testing food index', function() {
     // })
 
   })
-  //
-  // test.it("shows an error for missing name", function(){
-  //   driver.get(`${frontEndLocation}/foods.html`)
-  //   driver.wait(until.elementLocated({css: "#foods .food"}))
-  //
-  //   driver.findElement({css: "input#food-name-field.form-field"})
-  //   .sendKeys("")
-  //   driver.findElement({css: "input#calories-field.form-field"})
-  //   .sendKeys(300)
-  //   driver.findElement({css: "input[type=submit]"})
-  //   .click()
-  //
-  //
-  // })
+
+  test.it("shows an error for missing name", function(){
+    driver.get(`${frontEndLocation}/foods.html`)
+    driver.wait(until.elementLocated({css: "#foods .food"}))
+
+    driver.findElement({css: "input#food-name-field.form-field"})
+    .sendKeys("")
+    driver.findElement({css: "input#calories-field.form-field"})
+    .sendKeys(300)
+    driver.findElement({css: "input[type=submit]"})
+    .click()
+
+    driver.findElement({css: ".error"}).getText()
+    .then(function(message){
+      assert.include(message, "Please enter a food name.")
+    })
+
+    // driver.findElement({css: "input#food-name-field.form-field"})
+    // .sendKeys("Lil Smokies")
+    // driver.findElement({css: "input#calories-field.form-field"})
+    // .sendKeys(300)
+    // driver.findElement({css: "input[type=submit]"})
+    // .click()
+    //
+    // driver.sleep(5000)
+    //
+    // driver.findElement({css: ".food[data-id='4'] h3"}).getText()
+    // .then(function(name){
+    //   assert.include(name, "Lil Smokies")
+    // })
+    // driver.findElement({css: ".food[data-id='4'] .food-body"}).getText()
+    // .then(function(calories){
+    //   assert.equal(calories, 300)
+    // })
+
+  })
+
+  test.it("shows an error for missing calories", function(){
+    driver.get(`${frontEndLocation}/foods.html`)
+    driver.wait(until.elementLocated({css: "#foods .food"}))
+
+    driver.findElement({css: "input#food-name-field.form-field"})
+    .sendKeys("Watermelon")
+    driver.findElement({css: "input#calories-field.form-field"})
+    .sendKeys("")
+    driver.findElement({css: "input[type=submit]"})
+    .click()
+
+    driver.findElement({css: ".error"}).getText()
+    .then(function(message){
+      assert.include(message, "Please enter a calorie amount.")
+    })
+  })
+
+
 });
