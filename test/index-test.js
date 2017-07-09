@@ -73,5 +73,30 @@ test.describe('testing food index', function() {
     })
   })
 
+  test.it("each meal table has a remaining calories calculation at the very bottom", function() {
+    driver.get(`${frontEndLocation}`)
+    driver.wait(until.elementLocated({css: "#meal-4 .remaining-calories"}))
+    driver.findElement({css: "#meal-1 .remaining-calories"}).getText()
+    .then(function(totalCalorieRow) {
+      assert.include(totalCalorieRow, "Remaining Calories")
+      assert.include(totalCalorieRow, "-95")
+    })
+    driver.findElement({css: "#meal-2 .remaining-calories"}).getText()
+    .then(function(totalCalorieRow) {
+      assert.include(totalCalorieRow, "Remaining Calories")
+      assert.include(totalCalorieRow, "105")
+    })
+    driver.findElement({css: "#meal-3 .remaining-calories"}).getText()
+    .then(function(totalCalorieRow) {
+      assert.include(totalCalorieRow, "Remaining Calories")
+      assert.include(totalCalorieRow, "305")
+    })
+    driver.findElement({css: "#meal-4 .remaining-calories"}).getText()
+    .then(function(totalCalorieRow) {
+      assert.include(totalCalorieRow, "Remaining Calories")
+      assert.include(totalCalorieRow, "-295")
+    })
+  })
+
 
 });
