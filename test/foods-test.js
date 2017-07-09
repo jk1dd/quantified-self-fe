@@ -40,32 +40,46 @@ test.describe('testing food index', function() {
     })
   })
 
-  // test.it("lets a user create a new entry", function(){
-  //   // given:
-  //   // go there
-  //   driver.get(`${frontEndLocation}`)
-  //
-  //   // when:
-  //   // fill in auther field
-  //   // fill in body field
-  //   // hit submit
-  //   driver.findElement({css: "#author-field input"})
-  //   .sendKeys("Churchill")
-  //   driver.findElement({css: "#body-field input"})
-  //   .sendKeys("never waste a good crisis")
-  //   driver.findElement({css: "input[type=submit]"})
-  //   .click()
-  //
-  //   // then:
-  //   // see the post in the list of entries
-  //   driver.wait(until.elementLocated({css: ".entry[data-id='4']"}))
-  //   driver.findElement({css: ".entry[data-id='4'] h3"}).getText()
-  //   .then(function(header){
-  //     assert.include(header, "Churchill")
-  //   })
-  //   driver.findElement({css: ".entry[data-id='4'] .entry-body"}).getText()
-  //   .then(function(body){
-  //     assert.equal(body, "never waste a good crisis")
-  //   })
-  // })
+  test.it("lets a user create a new entry", function(){
+    // given:
+    // go there
+    driver.get(`${frontEndLocation}/foods.html`)
+
+    // when:
+    // fill in auther field
+    // fill in body field
+    // hit submit
+    driver.findElements({css: "#foods .food"})
+    .then(function(foods) {
+      assert.lengthOf(foods, 3);
+      // assert.include()
+    })
+
+    driver.findElement({css: "#food-name-field input"})
+    .sendKeys("Pizza")
+    driver.findElement({css: "#calories-field input"})
+    .sendKeys(300)
+    driver.findElement({css: "input[type=submit]"})
+    .click()
+
+    // then:
+    // see the post in the list of entries
+    driver.wait(until.elementLocated({css: ".food[data-id='4']"}))
+
+    driver.findElements({css: "#foods .food"})
+    .then(function(foods) {
+      assert.lengthOf(foods, 4);
+      // assert.include()
+    })
+
+    // driver.findElement({css: ".food[data-id='4'] h3"}).getText()
+    // .then(function(name){
+    //   assert.include(name, "Pizza")
+    // })
+    // driver.findElement({css: ".food[data-id='4'] .food-body"}).getText()
+    // .then(function(calories){
+    //   assert.equal(calories, 300)
+    // })
+
+  })
 });
