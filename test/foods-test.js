@@ -101,20 +101,25 @@ test.describe('testing food index', function() {
       assert.include(message, "Please enter a food name.")
     })
 
-    // driver.findElement({css: "input#food-name-field.form-field"})
-    // .sendKeys("Lil Smokies")
-    // driver.findElement({css: "input#calories-field.form-field"})
-    // .sendKeys(300)
-    // driver.findElement({css: "input[type=submit]"})
-    // .click()
-    //
-    // driver.sleep(5000)
-    //
-    // driver.findElement({css: ".food[data-id='4'] h3"}).getText()
+    driver.findElement({css: "input#food-name-field.form-field"})
+    .sendKeys("Lil Smokies")
+    driver.findElement({css: "input#calories-field.form-field"})
+    .sendKeys(300)
+    driver.findElement({css: "input[type=submit]"})
+    .click()
+
+    driver.sleep(5000)
+
+    driver.findElements({css: "#foods .food"})
+    .then(function(foods) {
+      assert.lengthOf(foods, 5);
+    })
+
+    // driver.findElement({css: "#foods .food #[data-id='5']"}).getText()
     // .then(function(name){
     //   assert.include(name, "Lil Smokies")
     // })
-    // driver.findElement({css: ".food[data-id='4'] .food-body"}).getText()
+    // driver.findElement({css: "#foods .food[data-id='5']"}).getText()
     // .then(function(calories){
     //   assert.equal(calories, 300)
     // })
@@ -135,6 +140,20 @@ test.describe('testing food index', function() {
     driver.findElement({css: ".error"}).getText()
     .then(function(message){
       assert.include(message, "Please enter a calorie amount.")
+    })
+
+    driver.findElement({css: "input#food-name-field.form-field"})
+    .sendKeys("Burger")
+    driver.findElement({css: "input#calories-field.form-field"})
+    .sendKeys(300)
+    driver.findElement({css: "input[type=submit]"})
+    .click()
+
+    driver.sleep(5000)
+
+    driver.findElements({css: "#foods .food"})
+    .then(function(foods) {
+      assert.lengthOf(foods, 6);
     })
   })
 
