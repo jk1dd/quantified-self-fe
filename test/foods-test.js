@@ -115,7 +115,7 @@ test.describe('testing food index', function() {
       assert.lengthOf(foods, 5);
     })
 
-    // driver.findElement({css: "#foods .food #[data-id='5']"}).getText()
+    // driver.findElement({css: "#foods .food[data-id='5']"}).getText()
     // .then(function(name){
     //   assert.include(name, "Lil Smokies")
     // })
