@@ -4,7 +4,7 @@ var until = webdriver.until;
 var test      = require('selenium-webdriver/testing');
 var frontEndLocation = "http://localhost:8080"
 
-test.describe('testing food index', function() {
+test.describe('testing viewing meal diary', function() {
   var driver;
   this.timeout(1000000);
 
