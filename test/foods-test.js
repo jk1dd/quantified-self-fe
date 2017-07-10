@@ -148,17 +148,17 @@ test.describe('testing food index', function() {
   //
   //   driver.findElements({css: "#foods .food"})
   //   .then(function(foods) {
-  //     assert.lengthOf(foods, 3);
+  //     assert.lengthOf(foods, 6);
   //   })
   //
-  //   driver.findElement({css: "button .delete-food"})
+  //   driver.findElement({css: "#foods .i[button-type='delete-food']"})
   //   .click()
   //
   //   driver.sleep(5000)
   //
   //   driver.findElements({css: "#foods .food"})
   //   .then(function(foods) {
-  //     assert.lengthOf(foods, 2);
+  //     assert.lengthOf(foods, 5);
   //   })
   // })
 
