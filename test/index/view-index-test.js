@@ -118,5 +118,34 @@ test.describe('testing viewing meal diary', function() {
     })
   })
 
+  test.it("displays positive remaining calories for meals and total in green", function(){
+    driver.get(`${frontEndLocation}`)
+    driver.wait(until.elementLocated({css: "#meal-4 .remaining-calories"}))
+    driver.findElement({css: "#meal-2 tr.remaining-calories th.positive-value"}).getText()
+    .then(function(remainingCalories){
+      assert.equal(remainingCalories, "105")
+    })
+    driver.findElement({css: "#meal-3 tr.remaining-calories th.positive-value"}).getText()
+    .then(function(remainingCalories){
+      assert.equal(remainingCalories, "305")
+    })
+    driver.findElement({css: ".totals th.positive-value"}).getText()
+    .then(function(remainingCalories){
+      assert.equal(remainingCalories, "20")
+    })
+  })
+
+  test.it("displays negative remaining calories for meals and total in red", function(){
+    driver.get(`${frontEndLocation}`)
+    driver.wait(until.elementLocated({css: "#meal-4 .remaining-calories"}))
+    driver.findElement({css: "#meal-1 tr.remaining-calories th.negative-value"}).getText()
+    .then(function(remainingCalories){
+      assert.equal(remainingCalories, "-95")
+    })
+    driver.findElement({css: "#meal-4 tr.remaining-calories th.negative-value"}).getText()
+    .then(function(remainingCalories){
+      assert.equal(remainingCalories, "-295")
+    })
+  })
 
 });
