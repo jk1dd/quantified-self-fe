@@ -23,15 +23,11 @@ test.describe('testing food index', function() {
   })
 
   test.it("lists all the foods on load", function() {
-    // var foodCount = Food.getAllFoods().then(function(data){
-    //   return data.rowCount
-    // })
     driver.get(`${frontEndLocation}/foods.html`)
     driver.wait(until.elementLocated({css: "#foods .food"}))
     driver.findElements({css: "#foods .food"})
     .then(function(foods) {
       assert.lengthOf(foods, 3);
-      // assert.include()
     })
     driver.findElement({css: "#foods .food[data-id='1']"}).getText()
     .then(function(tableRow){
@@ -41,19 +37,12 @@ test.describe('testing food index', function() {
   })
 
   test.it("lets a user create a new food", function(){
-    // given:
-    // go there
     driver.get(`${frontEndLocation}/foods.html`)
     driver.wait(until.elementLocated({css: "#foods .food"}))
 
-    // when:
-    // fill in auther field
-    // fill in body field
-    // hit submit
     driver.findElements({css: "#foods .food"})
     .then(function(foods) {
       assert.lengthOf(foods, 3);
-      // assert.include()
     })
 
     driver.findElement({css: "input#food-name-field.form-field"})
@@ -63,25 +52,21 @@ test.describe('testing food index', function() {
     driver.findElement({css: "input[type=submit]"})
     .click()
 
-    // then:
-    // see the post in the list of entries
-    // driver.wait(until.elementLocated({css: "#foods .food[data-id='4']"}))
     driver.sleep(5000)
 
     driver.findElements({css: "#foods .food"})
     .then(function(foods) {
       assert.lengthOf(foods, 4);
-      // assert.include()
     })
 
-    // driver.findElement({css: ".food[data-id='4'] h3"}).getText()
-    // .then(function(name){
-    //   assert.include(name, "Pizza")
-    // })
-    // driver.findElement({css: ".food[data-id='4'] .food-body"}).getText()
-    // .then(function(calories){
-    //   assert.equal(calories, 300)
-    // })
+    driver.findElement({css: "#foods .food[data-id='4']"}).getText()
+    .then(function(name){
+      assert.include(name, "Pizza")
+    })
+    driver.findElement({css: "#foods .food[data-id='4']"}).getText()
+    .then(function(calories){
+      assert.include(calories, 300)
+    })
 
   })
 
@@ -115,14 +100,14 @@ test.describe('testing food index', function() {
       assert.lengthOf(foods, 5);
     })
 
-    // driver.findElement({css: "#foods .food[data-id='5']"}).getText()
-    // .then(function(name){
-    //   assert.include(name, "Lil Smokies")
-    // })
-    // driver.findElement({css: "#foods .food[data-id='5']"}).getText()
-    // .then(function(calories){
-    //   assert.equal(calories, 300)
-    // })
+    driver.findElement({css: "#foods .food[data-id='5']"}).getText()
+    .then(function(name){
+      assert.include(name, "Lil Smokies")
+    })
+    driver.findElement({css: "#foods .food[data-id='5']"}).getText()
+    .then(function(calories){
+      assert.include(calories, 300)
+    })
 
   })
 
@@ -154,6 +139,26 @@ test.describe('testing food index', function() {
     driver.findElements({css: "#foods .food"})
     .then(function(foods) {
       assert.lengthOf(foods, 6);
+    })
+  })
+
+  test.it("lets a user delete a food", function(){
+    driver.get(`${frontEndLocation}/foods.html`)
+    driver.wait(until.elementLocated({css: "#foods .food"}))
+
+    driver.findElements({css: "#foods .food"})
+    .then(function(foods) {
+      assert.lengthOf(foods, 6);
+    })
+
+    driver.findElement({css: "#foods .fa[delete-id='food-5']"})
+    .click()
+
+    // driver.sleep(5000)
+
+    driver.findElements({css: "#foods .food"})
+    .then(function(foods) {
+      assert.lengthOf(foods, 5);
     })
   })
 
