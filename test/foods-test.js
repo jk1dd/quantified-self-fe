@@ -142,25 +142,25 @@ test.describe('testing food index', function() {
     })
   })
 
-  // test.it("lets a user delete a food", function(){
-  //   driver.get(`${frontEndLocation}/foods.html`)
-  //   driver.wait(until.elementLocated({css: "#foods .food"}))
-  //
-  //   driver.findElements({css: "#foods .food"})
-  //   .then(function(foods) {
-  //     assert.lengthOf(foods, 6);
-  //   })
-  //
-  //   driver.findElement({css: "#foods .i[button-type='delete-food']"})
-  //   .click()
-  //
-  //   driver.sleep(5000)
-  //
-  //   driver.findElements({css: "#foods .food"})
-  //   .then(function(foods) {
-  //     assert.lengthOf(foods, 5);
-  //   })
-  // })
+  test.it("lets a user delete a food", function(){
+    driver.get(`${frontEndLocation}/foods.html`)
+    driver.wait(until.elementLocated({css: "#foods .food"}))
+
+    driver.findElements({css: "#foods .food"})
+    .then(function(foods) {
+      assert.lengthOf(foods, 6);
+    })
+
+    driver.findElement({css: "#foods .fa[delete-id='food-5']"})
+    .click()
+
+    // driver.sleep(5000)
+
+    driver.findElements({css: "#foods .food"})
+    .then(function(foods) {
+      assert.lengthOf(foods, 5);
+    })
+  })
 
 
 });
