@@ -51,22 +51,22 @@ test.describe('testing viewing meal diary', function() {
   test.it("each meal table has a total calories calculation at the bottom", function() {
     driver.get(`${frontEndLocation}`)
     driver.wait(until.elementLocated({css: "#meal-4 .remaining-calories"}))
-    driver.findElement({css: "#meal-1 .total-calories"}).getText()
+    driver.findElement({css: "#meal-1 .total-calories-row"}).getText()
     .then(function(totalCalorieRow) {
       assert.include(totalCalorieRow, "Total Calories")
       assert.include(totalCalorieRow, "495")
     })
-    driver.findElement({css: "#meal-2 .total-calories"}).getText()
+    driver.findElement({css: "#meal-2 .total-calories-row"}).getText()
     .then(function(totalCalorieRow) {
       assert.include(totalCalorieRow, "Total Calories")
       assert.include(totalCalorieRow, "495")
     })
-    driver.findElement({css: "#meal-3 .total-calories"}).getText()
+    driver.findElement({css: "#meal-3 .total-calories-row"}).getText()
     .then(function(totalCalorieRow) {
       assert.include(totalCalorieRow, "Total Calories")
       assert.include(totalCalorieRow, "495")
     })
-    driver.findElement({css: "#meal-4 .total-calories"}).getText()
+    driver.findElement({css: "#meal-4 .total-calories-row"}).getText()
     .then(function(totalCalorieRow) {
       assert.include(totalCalorieRow, "Total Calories")
       assert.include(totalCalorieRow, "495")
@@ -95,6 +95,26 @@ test.describe('testing viewing meal diary', function() {
     .then(function(totalCalorieRow) {
       assert.include(totalCalorieRow, "Remaining Calories")
       assert.include(totalCalorieRow, "-295")
+    })
+  })
+
+  test.it("has a total calories table", function(){
+    driver.get(`${frontEndLocation}`)
+    driver.wait(until.elementLocated({css: "#meal-4 .remaining-calories"}))
+    driver.findElement({css: ".totals"}).getText()
+    .then(function(totalsTable){
+      assert.include(totalsTable, "Goal Calories")
+      assert.include(totalsTable, "2000")
+      assert.include(totalsTable, "Calories Consumed")
+      assert.include(totalsTable, "Remaining")
+    })
+    driver.findElement({css: ".totals #consumed"}).getText()
+    .then(function(consumedCalories){
+      assert.equal(consumedCalories, "1980")
+    })
+    driver.findElement({css: ".totals #total-remaining"}).getText()
+    .then(function(remainingCalories){
+      assert.equal(remainingCalories, "20")
     })
   })
 
