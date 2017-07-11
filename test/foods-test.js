@@ -154,11 +154,89 @@ test.describe('testing food index', function() {
     driver.findElement({css: "#foods .fa[delete-id='food-5']"})
     .click()
 
-    // driver.sleep(5000)
-
     driver.findElements({css: "#foods .food"})
     .then(function(foods) {
       assert.lengthOf(foods, 5);
+    })
+  })
+
+  test.it("lets a user edit a food name", function(){
+    driver.get(`${frontEndLocation}/foods.html`)
+    driver.wait(until.elementLocated({css: "#foods .food"}))
+
+    driver.findElements({css: "#foods .food"})
+    .then(function(foods) {
+      assert.lengthOf(foods, 6);
+    })
+
+    driver.findElement({css: "#foods .food[data-id='4']"}).getText()
+    .then(function(name){
+      assert.include(name, "Pizza")
+    })
+    driver.findElement({css: "#foods .food[data-id='4']"}).getText()
+    .then(function(calories){
+      assert.include(calories, 300)
+    })
+
+    driver.findElement({css: "tr.food[data-id='4'] td.name[contenteditable='true']"})
+    .click()
+    driver.findElement({css: "tr.food[data-id='4'] td.name[contenteditable='true']"})
+    .sendKeys("Blackberry")
+    driver.findElement({css: "body"})
+    .click()
+
+    driver.findElement({css: "#foods .food[data-id='4']"}).getText()
+    .then(function(name){
+      assert.include(name, "Blackberry")
+    })
+    driver.findElement({css: "#foods .food[data-id='4']"}).getText()
+    .then(function(calories){
+      assert.include(calories, 300)
+    })
+
+    driver.findElements({css: "#foods .food"})
+    .then(function(foods) {
+      assert.lengthOf(foods, 6);
+    })
+  })
+
+  test.it("lets a user edit a food calories", function(){
+    driver.get(`${frontEndLocation}/foods.html`)
+    driver.wait(until.elementLocated({css: "#foods .food"}))
+
+    driver.findElements({css: "#foods .food"})
+    .then(function(foods) {
+      assert.lengthOf(foods, 6);
+    })
+
+    driver.findElement({css: "#foods .food[data-id='5']"}).getText()
+    .then(function(name){
+      assert.include(name, "Lil Smokies")
+    })
+    driver.findElement({css: "#foods .food[data-id='5']"}).getText()
+    .then(function(calories){
+      assert.include(calories, 300)
+    })
+
+    driver.findElement({css: "tr.food[data-id='5'] td.calories[contenteditable='true']"})
+    .click()
+    driver.findElement({css: "tr.food[data-id='5'] td.calories[contenteditable='true']"})
+    .sendKeys(500)
+    driver.findElement({css: "body"})
+    .click()
+
+    driver.findElement({css: "#foods .food[data-id='5']"}).getText()
+    .then(function(name){
+      assert.include(name, "Lil Smokies")
+    })
+    driver.findElement({css: "#foods .food[data-id='5']"}).getText()
+    .then(function(calories){
+      assert.include(calories, 500)
+    })
+
+    driver.findElements({css: "#foods .food"})
+    .then(function(foods) {
+      assert.lengthOf(foods, 6);
     })
   })
 
