@@ -148,4 +148,16 @@ test.describe('testing viewing meal diary', function() {
     })
   })
 
+  test.it("displays food table with checkboxes name and calories", function(){
+    driver.get(`${frontEndLocation}`)
+    driver.wait(until.elementLocated({css: ".diary-foods-table .diary-food[data-id='1']"}))
+    driver.findElement({css: ".diary-foods-table .diary-food[data-id='1']"}).getText()
+    .then(function(diaryFood){
+      assert.include(diaryFood, "Orange")
+      assert.include(diaryFood, "90")
+    })
+    var checkboxElement = driver.findElement({css: ".diary-foods-table .diary-food[data-id='1'] td.selected"})
+    assert(checkboxElement)
+  })
+
 });
