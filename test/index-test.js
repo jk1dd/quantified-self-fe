@@ -148,4 +148,55 @@ test.describe('testing viewing meal diary', function() {
     })
   })
 
+  test.it("displays food table with checkboxes name and calories", function(){
+    driver.get(`${frontEndLocation}`)
+    driver.wait(until.elementLocated({css: ".diary-foods-table .diary-food[data-id='1']"}))
+    driver.findElement({css: ".diary-foods-table .diary-food[data-id='1']"}).getText()
+    .then(function(diaryFood){
+      assert.include(diaryFood, "Orange")
+      assert.include(diaryFood, "90")
+    })
+    var checkboxElement = driver.findElement({css: ".diary-foods-table .diary-food[data-id='1'] td.selected"})
+    assert(checkboxElement)
+  })
+
+  test.it("adds foods to a meal", function() {
+    driver.get(`${frontEndLocation}`)
+    driver.wait(until.elementLocated({css: ".diary-foods-table .diary-food[data-id='1']"}))
+    // click on two foods in the foods table
+    driver.findElement({css: ".diary-foods-table .diary-food[data-id='1'] td.selected input[type=checkbox]"}).click()
+    driver.findElement({css: ".diary-foods-table .diary-food[data-id='2'] td.selected input[type=checkbox]"}).click()
+    // check that checkbox elements are checked
+    var checkboxedElement = driver.findElement({css: ".diary-foods-table .diary-food[data-id='1'] td.selected input:checked[type=checkbox]"})
+    assert(checkboxedElement)
+    var checkboxedElement2 = driver.findElement({css: ".diary-foods-table .diary-food[data-id='2'] td.selected input:checked[type=checkbox]"})
+    assert(checkboxedElement2)
+    // click on "Dinner" button
+    driver.findElement({css: ".meal-buttons button[data-id='3']"}).click()
+    // wait until those elements are added to the #meals-3 table
+    driver.wait(until.elementLocated({css: "#meal-3 .food-meal[data-id='14']"}))
+    // check that those foods were added to the table
+    driver.findElements({css: "#meal-3 .food-meal"})
+    .then(function(foodMeals) {
+      assert.lengthOf(foodMeals, 5);
+    })
+    // check that dinner's new total calories goes from 495 690
+    // check that dinner's new remaining calories is 305 to 110
+    driver.findElement({css: "#meal-3 .total-calories-row"}).getText()
+    .then(function(totalCalorieRow) {
+      assert.include(totalCalorieRow, "Total Calories")
+      assert.include(totalCalorieRow, "690")
+    })
+    driver.findElement({css: "#meal-3 .remaining-calories"}).getText()
+    .then(function(totalCalorieRow) {
+      assert.include(totalCalorieRow, "Remaining Calories")
+      assert.include(totalCalorieRow, "110")
+    })
+    // check that checkbox elements are unchecked
+    var uncheckboxedElement = driver.findElement({css: ".diary-foods-table .diary-food[data-id='1'] td.selected input:not(:checked)[type=checkbox]"})
+    assert(uncheckboxedElement)
+    var uncheckboxedElement2 = driver.findElement({css: ".diary-foods-table .diary-food[data-id='2'] td.selected input:not(:checked)[type=checkbox]"})
+    assert(uncheckboxedElement2)
+  })
+
 });
