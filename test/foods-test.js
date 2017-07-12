@@ -22,6 +22,10 @@ test.describe('testing food index', function() {
     driver.quit();
   })
 
+  test.it("it resets the database", function(){
+    driver.get("http://qs-food-log.herokuapp.com/api/meals/reset")
+  })
+
   test.it("lists all the foods on load", function() {
     driver.get(`${frontEndLocation}/foods.html`)
     driver.wait(until.elementLocated({css: "#foods .food"}))
@@ -142,23 +146,6 @@ test.describe('testing food index', function() {
     })
   })
 
-  test.it("lets a user delete a food", function(){
-    driver.get(`${frontEndLocation}/foods.html`)
-    driver.wait(until.elementLocated({css: "#foods .food"}))
-
-    driver.findElements({css: "#foods .food"})
-    .then(function(foods) {
-      assert.lengthOf(foods, 6);
-    })
-
-    driver.findElement({css: "#foods .fa[delete-id='food-5']"})
-    .click()
-
-    driver.findElements({css: "#foods .food"})
-    .then(function(foods) {
-      assert.lengthOf(foods, 5);
-    })
-  })
 
   test.it("lets a user edit a food name", function(){
     driver.get(`${frontEndLocation}/foods.html`)
@@ -257,6 +244,24 @@ test.describe('testing food index', function() {
       assert.lengthOf(foods, 5);
     })
 
+  })
+
+  test.it("lets a user delete a food", function(){
+    driver.get(`${frontEndLocation}/foods.html`)
+    driver.wait(until.elementLocated({css: "#foods .food"}))
+
+    driver.findElements({css: "#foods .food"})
+    .then(function(foods) {
+      assert.lengthOf(foods, 6);
+    })
+
+    driver.findElement({css: "#foods .fa[delete-id='food-5']"})
+    .click()
+
+    driver.findElements({css: "#foods .food"})
+    .then(function(foods) {
+      assert.lengthOf(foods, 5);
+    })
   })
 
 
