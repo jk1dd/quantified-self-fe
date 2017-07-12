@@ -5,25 +5,31 @@
   <title>Quantified Self - Manage Foods</title>
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
-  <h1>Manage Foods</h1>
-  <section id="create-foods">
-    <h2>Add New Food:</h2>
+  <div class="container">
+    <h1>Manage Foods</h1>
+    <section id="create-foods">
+      <h4>Add New Food:</h4>
       <form id="food-form">
         <input type="text" placeholder="Food Name" class="form-field" id="food-name-field">
         <input type="number" placeholder="Calories" class="form-field" id="calories-field">
         <input type="submit" value="Submit">
       </form>
-  </section>
-  <input type="text" id="name-search" placeholder="Search for names..">
-  <table id='foods'>
-    <tr id='title-row'>
-      <th>Name</th>
-      <th>Calories</th>
-      <th></th>
-    </tr>
-  </table>
+    </section>
+    <hr>
+    <h4>Filter by Name</h4>
+    <input type="text" id="name-search" placeholder="Search for names..">
+    <hr>
+    <table id='foods' class='table table-striped'>
+      <tr id='title-row'>
+        <th>Name</th>
+        <th>Calories</th>
+        <th></th>
+      </tr>
+    </table>
+  </div>
   <script src="main.bundle.js"></script>
 </body>
 </html>
