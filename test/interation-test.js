@@ -100,7 +100,7 @@ test.describe('testing food and diary interactions', function() {
     })
   })
 
-  test.it.only("Create New button redirects to foods.html", function() {
+  test.it("Create New button redirects to foods.html", function() {
     driver.get(`${frontEndLocation}/index.html`)
     driver.wait(until.elementLocated({css: "#meal-4 .remaining-calories"}))
 
