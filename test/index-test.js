@@ -199,4 +199,26 @@ test.describe('testing viewing meal diary', function() {
     assert(uncheckboxedElement2)
   })
 
+  // When I type into the "Search by Name" box above the Foods table,
+  // the table will only display foods that match the typed text,
+  // case insensitive. List of foods should update with each
+  // change to the search box.
+  test.it.only("lets a user search foods by name", function(){
+    driver.get(`${frontEndLocation}`)
+    driver.wait(until.elementLocated({css: ".diary-foods-table .diary-food[data-id='1']"}))
+
+    driver.findElements({css: ".diary-foods-table .food-meal[style='display: none;']"})
+    .then(function(foods){
+      assert.lengthOf(foods, 0)
+    })
+
+    driver.findElement({css: "#diary-name-search"})
+    .sendKeys("burg")
+
+    driver.findElements({css: ".diary-foods-table .food-meal[style='display: none;']"})
+    .then(function(foods){
+      assert.lengthOf(foods, 5)
+    })
+  })
+
 });
