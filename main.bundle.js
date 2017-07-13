@@ -191,10 +191,29 @@
 	    }
 	  });
 
-	  $('#name-search').keyup(function () {
-	    var input = document.getElementById('name-search');
+	  foodSearch('name-search', 'name');
+	  // $('#name-search').keyup(function() {
+	  //   var input = document.getElementById('name-search')
+	  //   var filter = input.value.toUpperCase()
+	  //   var foodRows = document.getElementsByClassName('name')
+	  //
+	  //   for (i = 0; i < foodRows.length; i++) {
+	  //     var foodName = foodRows[i].innerText
+	  //     if (foodName.toUpperCase().indexOf(filter) > -1) {
+	  //       foodRows[i].parentElement.style.display = "";
+	  //     } else {
+	  //       foodRows[i].parentElement.style.display = "none";
+	  //     }
+	  //     debugger
+	  //   }
+	  // })
+	});
+
+	function foodSearch(tableName, rowName) {
+	  $(`#${tableName}`).keyup(function () {
+	    var input = document.getElementById(tableName);
 	    var filter = input.value.toUpperCase();
-	    var foodRows = document.getElementsByClassName('name');
+	    var foodRows = document.getElementsByClassName(rowName);
 
 	    for (i = 0; i < foodRows.length; i++) {
 	      var foodName = foodRows[i].innerText;
@@ -203,9 +222,10 @@
 	      } else {
 	        foodRows[i].parentElement.style.display = "none";
 	      }
+	      debugger;
 	    }
 	  });
-	});
+	}
 
 	function sortFoodMeals() {
 	  $('.meal-rows').on("click", function (event) {
@@ -267,6 +287,24 @@
 	  addFoodToMeal();
 	  deleteFoodFromMeal();
 	  sortFoodMeals();
+	  foodSearch('diary-name-search', 'diary-name');
+	  // function diaryFoodSearch(tableName) {
+	  // $(`#diary-name-search`).keyup(function() {
+	  //   var input = document.getElementById('diary-name-search')
+	  //   var filter = input.value.toUpperCase()
+	  //   var foodRows = document.getElementsByClassName('diary-name')
+	  //
+	  //   for (i = 0; i < foodRows.length; i++) {
+	  //     var foodName = foodRows[i].innerText
+	  //     if (foodName.toUpperCase().indexOf(filter) > -1) {
+	  //       foodRows[i].parentElement.style.display = "";
+	  //     } else {
+	  //       foodRows[i].parentElement.style.display = "none";
+	  //     }
+	  //     // debugger
+	  //   }
+	  // })
+	  // }
 	});
 
 /***/ }),
@@ -293,7 +331,7 @@
 	Food.prototype.toDiaryHTML = function () {
 	  return `<tr class="diary-food" data-id=${this.id}>
 	            <td class="selected"><input type="checkbox"></td>
-	            <td>${this.name}</td>
+	            <td class="diary-name">${this.name}</td>
 	            <td>${this.calories}</td>
 	          </tr>`;
 	};
