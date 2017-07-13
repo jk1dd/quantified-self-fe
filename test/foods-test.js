@@ -227,24 +227,24 @@ test.describe('testing food index', function() {
     })
   })
 
-  // test.it("lets a user filter foods", function() {
-  //   driver.get(`${frontEndLocation}/foods.html`)
-  //   driver.wait(until.elementLocated({css: "#foods .food"}))
-  //
-  //   driver.findElements({css: "#foods .food[style='display: none;']"})
-  //   .then(function(foods) {
-  //     assert.lengthOf(foods, 0);
-  //   })
-  //
-  //   driver.findElement({css: "#name-search"})
-  //   .sendKeys("burg")
-  //
-  //   driver.findElements({css: "#foods .food[style='display: none;']"})
-  //   .then(function(foods) {
-  //     assert.lengthOf(foods, 5);
-  //   })
-  //
-  // })
+  test.it("lets a user filter foods", function() {
+    driver.get(`${frontEndLocation}/foods.html`)
+    driver.wait(until.elementLocated({css: "#foods .food"}))
+
+    driver.findElements({css: "#foods .food[style='display: none;']"})
+    .then(function(foods) {
+      assert.lengthOf(foods, 0);
+    })
+
+    driver.findElement({css: "#name-search"})
+    .sendKeys("burg")
+
+    driver.findElements({css: "#foods .food[style='display: none;']"})
+    .then(function(foods) {
+      assert.lengthOf(foods, 5);
+    })
+
+  })
 
   test.it("lets a user delete a food", function(){
     driver.get(`${frontEndLocation}/foods.html`)

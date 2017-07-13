@@ -199,7 +199,7 @@ test.describe('testing viewing meal diary', function() {
     assert(uncheckboxedElement2)
   })
 
-  test.it.only("deletes food from meal", function(){
+  test.it.skip("deletes food from meal", function(){
     driver.get(`${frontEndLocation}`)
     driver.wait(until.elementLocated({css: ".diary-foods-table .diary-food[data-id='1']"}))
 
@@ -213,12 +213,7 @@ test.describe('testing viewing meal diary', function() {
       assert.include(totalCalorieRow, "-95")
     })
 
-    driver.findElement({css: ".meal-rows #meal-1 .food-meal[data-id='1'] td .fa"})
-    .then(function(){
-      console.log("I did it.")
-    })
-
-    driver.findElement({css: "#meal-1 .food-meal[data-id='1'] td i.fa"}).sendKeys(Keys.Enter)
+    driver.findElement({css: "#meal-1 .food-meal[data-id='1'] td i.fa"}).click()
 
     driver.findElement({css: "#meal-1 .remaining-calories"}).getText()
     .then(function(totalCalorieRow) {
