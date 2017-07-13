@@ -10614,7 +10614,7 @@
 /***/ (function(module, exports) {
 
 	module.exports = {
-	  host: 'http://qs-food-log.herokuapp.com'
+	  host: 'https://qs-food-log.herokuapp.com'
 	};
 
 /***/ }),
