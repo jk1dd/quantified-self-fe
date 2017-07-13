@@ -199,4 +199,50 @@ test.describe('testing viewing meal diary', function() {
     assert(uncheckboxedElement2)
   })
 
+  test.it("deletes food from meal", function(){
+    driver.get(`${frontEndLocation}`)
+    driver.wait(until.elementLocated({css: ".diary-foods-table .diary-food[data-id='1']"}))
+
+    driver.findElements({css: "#meal-1 .food-meal"})
+    .then(function(foodMeals) {
+      assert.lengthOf(foodMeals, 3);
+    })
+
+    driver.findElement({css: "#meal-1 .remaining-calories"}).getText()
+    .then(function(totalCalorieRow) {
+      assert.include(totalCalorieRow, "-95")
+    })
+
+    driver.findElement({css: "#meal-1 .food-meal[data-id='1'] td i.fa"}).click()
+
+    driver.findElement({css: "#meal-1 .remaining-calories"}).getText()
+    .then(function(totalCalorieRow) {
+      assert.include(totalCalorieRow, "-95")
+    })
+
+    driver.findElements({css: "#meal-1 .food-meal"})
+    .then(function(foodMeals) {
+      assert.lengthOf(foodMeals, 3);
+    })
+
+  })
+
+  test.it("sorts meal by calories", function(){
+    driver.get(`${frontEndLocation}`)
+    driver.wait(until.elementLocated({css: ".diary-foods-table .diary-food[data-id='1']"}))
+
+    driver.findElement({css: "#meal-1 .calories"}).click()
+
+    driver.findElement({css: "#meal-1 .name"}).getText()
+    .then(function(foods) {
+      assert.equal(foods.substr(0,16), "Orange")
+    })
+
+    driver.findElement({css: "#meal-1 .calories"}).click()
+
+    driver.findElement({css: "#meal-1 .name"}).getText()
+    .then(function(foods) {
+      assert.equal(foods.substr(0,21), "Garden Salsa Sunchips")
+    })
+  })
 });
