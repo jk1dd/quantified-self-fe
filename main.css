@@ -5,3 +5,8 @@
 .positive-value {
   color: green;
 }
+
+a {
+  text-decoration: none;
+  color: white;
+}
